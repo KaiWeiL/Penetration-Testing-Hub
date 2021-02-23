@@ -13,7 +13,7 @@ namespace Penetration_Testing_Hub.Data
         {
         }
 
-        public DbSet<StageTechnique_Reconnaissance_Tool> StageTechnique_Reconnaissance_Tools { get; set; }
-        public DbSet<StageTechnique_Reconnaissance_Tool_Post> StageTechnique_Reconnaissance_Tool_Posts { get; set; }
+        public DbSet<PTHThread> PTHThreads { get; set; }
+        public DbSet<PTHPost> PTHPosts { get; set; }
     }
 }

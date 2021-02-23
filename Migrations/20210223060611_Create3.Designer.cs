@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Penetration_Testing_Hub.Data;
 
 namespace Penetration_Testing_Hub.Migrations
 {
     [DbContext(typeof(PTHDbContext))]
-    partial class PTHDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210223060611_Create3")]
+    partial class Create3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,9 +68,6 @@ namespace Penetration_Testing_Hub.Migrations
                     b.Property<string>("OP")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("ThreadCategory")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasMaxLength(100)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Penetration_Testing_Hub.Models
 {
-    public class StageTechnique_Reconnaissance_Tool_Post
+    public class PTHPost
     {
         public int Id { get; set; }
         [StringLength(100)]
@@ -16,10 +16,10 @@ namespace Penetration_Testing_Hub.Models
         public string OP { get; set; }
         public DateTime PostTime { get; set; }
         public string PostFileName { get; set; }
-        public int StageTechnique_Reconnaissance_ToolId { get; set; }
+        public int PTHThreadId { get; set; }
 
 
-        public StageTechnique_Reconnaissance_Tool StageTechnique_Reconnaissance_Tool { get; set; }
+        public PTHThread PTHThread { get; set; }
 
     }
 }

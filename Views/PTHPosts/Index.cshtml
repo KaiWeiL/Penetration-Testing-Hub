@@ -1,8 +1,5 @@
-﻿@model IEnumerable<Penetration_Testing_Hub.Models.StageTechnique_Reconnaissance_Tool_Post>
+﻿@model IEnumerable<Penetration_Testing_Hub.Models.PTHPost>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
 <h1>Index</h1>
 
@@ -25,13 +22,14 @@
                 @Html.DisplayNameFor(model => model.PostFileName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StageTechnique_Reconnaissance_Tool)
+                @Html.DisplayNameFor(model => model.PTHThread)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    @if (item.PTHThreadId.ToString() == (string)TempData["Thread"]) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)
@@ -46,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.PostFileName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StageTechnique_Reconnaissance_Tool.Id)
+                @Html.DisplayFor(modelItem => item.PTHThread.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -54,6 +52,8 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+        }
+    }
+        <a asp-controller="PTHThreads" asp-action="Index">Go back to threads</a>
     </tbody>
 </table>

@@ -1,17 +1,18 @@
-﻿@model Penetration_Testing_Hub.Models.StageTechnique_Reconnaissance_Tool_Post
+﻿@model Penetration_Testing_Hub.Models.PTHPost
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
-<h4>StageTechnique_Reconnaissance_Tool_Post</h4>
+<h4>PTHPost</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                 <input asp-for="Subject" class="form-control" />
@@ -33,11 +34,12 @@
                 <span asp-validation-for="PostFileName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StageTechnique_Reconnaissance_ToolId" class="control-label"></label>
-                <select asp-for="StageTechnique_Reconnaissance_ToolId" class ="form-control" asp-items="ViewBag.StageTechnique_Reconnaissance_ToolId"></select>
+                <label asp-for="PTHThreadId" class="control-label"></label>
+                <select asp-for="PTHThreadId" class="form-control" asp-items="ViewBag.PTHThreadId"></select>
+                <span asp-validation-for="PTHThreadId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

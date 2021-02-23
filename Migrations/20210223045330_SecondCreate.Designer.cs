@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Penetration_Testing_Hub.Data;
 
 namespace Penetration_Testing_Hub.Migrations
 {
     [DbContext(typeof(PTHDbContext))]
-    partial class PTHDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210223045330_SecondCreate")]
+    partial class SecondCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +32,14 @@ namespace Penetration_Testing_Hub.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("PTHThreadId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PostFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PostTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("StageTechnique_Reconnaissance_ToolId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(100)
@@ -45,7 +47,7 @@ namespace Penetration_Testing_Hub.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PTHThreadId");
+                    b.HasIndex("StageTechnique_Reconnaissance_ToolId");
 
                     b.ToTable("PTHPosts");
                 });
@@ -67,9 +69,6 @@ namespace Penetration_Testing_Hub.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ThreadCategory")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -81,18 +80,18 @@ namespace Penetration_Testing_Hub.Migrations
 
             modelBuilder.Entity("Penetration_Testing_Hub.Models.PTHPost", b =>
                 {
-                    b.HasOne("Penetration_Testing_Hub.Models.PTHThread", "PTHThread")
-                        .WithMany("PTHPosts")
-                        .HasForeignKey("PTHThreadId")
+                    b.HasOne("Penetration_Testing_Hub.Models.PTHThread", "StageTechnique_Reconnaissance_Tool")
+                        .WithMany("StageTechnique_Reconnaissance_Tool_Posts")
+                        .HasForeignKey("StageTechnique_Reconnaissance_ToolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PTHThread");
+                    b.Navigation("StageTechnique_Reconnaissance_Tool");
                 });
 
             modelBuilder.Entity("Penetration_Testing_Hub.Models.PTHThread", b =>
                 {
-                    b.Navigation("PTHPosts");
+                    b.Navigation("StageTechnique_Reconnaissance_Tool_Posts");
                 });
 #pragma warning restore 612, 618
         }
