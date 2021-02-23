@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Penetration_Testing_Hub.Models.StageTechnique_Reconnaissance_Tool_Post>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostFileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StageTechnique_Reconnaissance_Tool)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostFileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StageTechnique_Reconnaissance_Tool.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

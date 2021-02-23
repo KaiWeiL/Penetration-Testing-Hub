@@ -14,6 +14,7 @@ namespace Penetration_Testing_Hub.Models
         public DateTime CreatTime { get; set; }
         public DateTime ModifyTime { get; set; }
         [StringLength(30)]
+        [Display(Name = "User")]
         public string OP { get; set; }
 
         public ICollection<StageTechnique_Reconnaissance_Tool_Post> StageTechnique_Reconnaissance_Tool_Posts { get; set; }

@@ -23,7 +23,7 @@ namespace Penetration_Testing_Hub.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Stage()
         {
             return View();
         }

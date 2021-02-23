@@ -19,4 +19,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Stage\Post-Exploitation\" />
+    <Folder Include="Views\Stage\Exploitation\" />
+    <Folder Include="Views\Stage\Privilege Escalation\" />
+    <Folder Include="Views\Stage\Reconnaissance\" />
+  </ItemGroup>
+
 </Project>
