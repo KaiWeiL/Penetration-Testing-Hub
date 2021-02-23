@@ -34,6 +34,15 @@ namespace Penetration_Testing_Hub
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
@@ -57,6 +66,9 @@ namespace Penetration_Testing_Hub
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            // enable Session state
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

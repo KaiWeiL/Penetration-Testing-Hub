@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +23,9 @@ namespace Penetration_Testing_Hub.Controllers
         // GET: PTHPosts
         public async Task<IActionResult> Index(string ThreadId)
         {
+            //HttpContext.Session.SetString("ThreadId", ThreadId);
             var pTHDbContext = _context.PTHPosts.Include(p => p.PTHThread);
-            return View(await pTHDbContext.ToListAsync());
+            return View(await pTHDbContext.Where<>.ToListAsync());
         }
 
         // GET: PTHPosts/Details/5

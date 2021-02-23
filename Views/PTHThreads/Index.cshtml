@@ -26,10 +26,9 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-    @TempData["Thread"] = item.Id;
         <tr>
             <td>
-                <a asp-controller="PTHPosts" asp-action="Index" asp-route-ThreadIf="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
+                <a asp-controller="PTHPosts" asp-action="Index" asp-route-ThreadId="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatTime)
