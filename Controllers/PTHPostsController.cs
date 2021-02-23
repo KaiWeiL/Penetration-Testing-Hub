@@ -24,8 +24,8 @@ namespace Penetration_Testing_Hub.Controllers
         public async Task<IActionResult> Index(string ThreadId)
         {
             //HttpContext.Session.SetString("ThreadId", ThreadId);
-            var pTHDbContext = _context.PTHPosts.Include(p => p.PTHThread);
-            return View(await pTHDbContext.Where<>.ToListAsync());
+            var pTHDbContext = _context.PTHPosts.Include(p => p.PTHThread).Where(p => p.PTHThreadId.ToString() == ThreadId);
+            return View(await pTHDbContext.ToListAsync());
         }
 
         // GET: PTHPosts/Details/5
@@ -65,7 +65,9 @@ namespace Penetration_Testing_Hub.Controllers
             {
                 _context.Add(pTHPost);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                //fixed empty list after creation through passing ThreadId for redirection
+                return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId});
             }
             ViewData["PTHThreadId"] = new SelectList(_context.PTHThreads, "Id", "Id", pTHPost.PTHThreadId);
             return View(pTHPost);
@@ -118,7 +120,7 @@ namespace Penetration_Testing_Hub.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId });
             }
             ViewData["PTHThreadId"] = new SelectList(_context.PTHThreads, "Id", "Id", pTHPost.PTHThreadId);
             return View(pTHPost);
@@ -151,7 +153,7 @@ namespace Penetration_Testing_Hub.Controllers
             var pTHPost = await _context.PTHPosts.FindAsync(id);
             _context.PTHPosts.Remove(pTHPost);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId });
         }
 
         private bool PTHPostExists(int id)

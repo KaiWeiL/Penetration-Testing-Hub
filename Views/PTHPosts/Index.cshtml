@@ -30,8 +30,6 @@
     <tbody>
         @foreach (var item in Model)
         {
-            @if (item.PTHThreadId.ToString() == (string)TempData["Thread"])
-            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Subject)
@@ -54,7 +52,6 @@
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
-            }
         }
 
     </tbody>
