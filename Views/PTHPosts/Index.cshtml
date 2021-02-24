@@ -1,7 +1,31 @@
 ﻿@model IEnumerable<Penetration_Testing_Hub.Models.PTHPost>
 
 
-<h1>Index</h1>
+@section Styles {
+    <link href="~/summernote-0.8.18-dist/summernote-lite.css" rel="stylesheet">
+}
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 200,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true                  // set focus to editable area after initializing summernote
+            });
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery-3.4.1.slim.min.js"></script>
+    <script src="~/summernote-0.8.18-dist/summernote-lite.js"></script>
+
+}
+
+
+
+<h1>Post</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -30,30 +54,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Subject)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OP)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PostTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PostFileName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PTHThread.Id)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostFileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PTHThread.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
 
     </tbody>
 </table>
+<form method="post">
+    <textarea id="summernote" name="editordata"></textarea>
+</form>
 <a asp-controller="PTHThreads" asp-action="Index">Go back to threads</a>
