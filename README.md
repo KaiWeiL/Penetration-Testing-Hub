@@ -34,7 +34,7 @@ Forum Navigation (Underdevelopment)
         - Technique (Threads contain here)
         
 Database Table Structure
-![alt text](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
+![Penetration Testing Hub](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
 
 
 Features added and configured:
