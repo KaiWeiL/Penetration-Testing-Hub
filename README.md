@@ -1,4 +1,4 @@
-# Penetration-Testing-Hub
+# Penetration Testing Hub
 - A Forum that congregate the good minds and content of pentesters
 - A place for professional penetration testers and enthusiasts to share and discuss the tools and techniques
 
