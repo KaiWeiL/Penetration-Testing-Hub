@@ -1,6 +1,6 @@
 # Penetration-Testing-Hub
-A Forum that congregate the good minds and content of pentesters
-place for professional penetration testers and enthusiasts to share and discuss the tools and techniques
+- A Forum that congregate the good minds and content of pentesters
+- A place for professional penetration testers and enthusiasts to share and discuss the tools and techniques
 
 Azure hosted site:<br>
 [Penetration Testing Hub](https://penetrationtestinghub20210225092748.azurewebsites.net)
