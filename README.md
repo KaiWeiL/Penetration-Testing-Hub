@@ -4,7 +4,7 @@ A Forum that congregate the good minds and content of pentesters
 Azure hosted site:<br>
 [Penetration Testing Hub](https://penetrationtestinghub20210225092748.azurewebsites.net)
 
-Forum Navigation (Underdevelopment)
+<h2>Forum Navigation (Underdevelopment)</h2>
 - Highlighted Post
 - Stage Technique
     - Reconnaissance
@@ -33,11 +33,11 @@ Forum Navigation (Underdevelopment)
         - Tool (Threads contain here)
         - Technique (Threads contain here)
         
-Database Table Structure
+<h2>Database Table Structure</h2>
 ![alt text](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
 
 
-Features added and configured:
+<h2>Features added and configured:</h2>
 
 --Feb 23
 Add Summernote editor into post page.
