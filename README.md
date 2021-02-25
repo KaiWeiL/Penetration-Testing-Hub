@@ -35,6 +35,35 @@ Azure hosted site:<br>
 <li>        - Tool (Threads contain here)</li>
 <li>        - Technique (Threads contain here)</li>
 </ul>
+
+Forum Navigation
+- Highlighted Post
+- Stage Technique
+    - Reconnaissance
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Exploitation
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Privilege Escalation
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Post-Exploitation
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+- Active Directory
+    - Enumeration
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Authentication
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Lateral Movement
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
+    - Persistence
+        - Tool (Threads contain here)
+        - Technique (Threads contain here)
         
 <h2>Database Table Structure</h2>
 ![alt text](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
