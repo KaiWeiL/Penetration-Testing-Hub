@@ -1,7 +1,7 @@
 # Penetration-Testing-Hub
 A Forum that congregate the good minds and content of pentesters
 
-Linked to the Azure hosted site:
+Azure hosted site:<br>
 [Penetration Testing Hub](https://penetrationtestinghub20210225092748.azurewebsites.net)
 
 Forum Navigation (Underdevelopment)
