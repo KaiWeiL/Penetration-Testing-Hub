@@ -2,7 +2,7 @@
 A Forum that congregate the good minds and content of pentesters
 
 Linked to the Azure hosted site:
-[TEXT TO SHOW](https://penetrationtestinghub20210225092748.azurewebsites.net)
+[Penetration Testing Hub](https://penetrationtestinghub20210225092748.azurewebsites.net)
 
 Forum Navigation (Underdevelopment)
 - Highlighted Post
@@ -34,7 +34,7 @@ Forum Navigation (Underdevelopment)
         - Technique (Threads contain here)
         
 Database Table Structure
-[Penetration Testing Hub](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/[branch]/image.jpg?raw=true)
 
 
 Features added and configured:
