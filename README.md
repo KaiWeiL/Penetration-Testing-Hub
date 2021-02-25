@@ -35,7 +35,7 @@ Forum Navigation
         - Technique (Threads contain here)
         
 <h2>Database Table Structure</h2>
-[alt text](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/master/PTH_db_design.jpg?raw=true)
+[Picture](https://github.com/KaiWeiL/Penetration-Testing-Hub/blob/master/PTH_db_design.jpg?raw=true)
 
 
 <h2>Features added and configured:</h2>
