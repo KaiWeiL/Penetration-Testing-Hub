@@ -1,5 +1,6 @@
 # Penetration-Testing-Hub
 A Forum that congregate the good minds and content of pentesters
+place for professional penetration testers and enthusiasts to share and discuss the tools and techniques
 
 Azure hosted site:<br>
 [Penetration Testing Hub](https://penetrationtestinghub20210225092748.azurewebsites.net)
@@ -8,9 +9,9 @@ Azure hosted site:<br>
 <ul>
 <li>- Highlighted Post</li>
 <li>- Stage Technique</li>
-<li>    - Reconnaissance</li>
+<li><ul><li>    - Reconnaissance</li>
 <li>        - Tool (Threads contain here)</li>
-<li>        - Technique (Threads contain here)</li>
+<li>        - Technique (Threads contain here)</li></li>
 <li>    - Exploitation</li>
 <li>        - Tool (Threads contain here)</li>
 <li>        - Technique (Threads contain here)</li>
@@ -19,7 +20,7 @@ Azure hosted site:<br>
 <li>        - Technique (Threads contain here)</li>
 <li>    - Post-Exploitation</li>
 <li>        - Tool (Threads contain here)</li>
-<li>        - Technique (Threads contain here)</li>
+<li>        - Technique (Threads contain here)<ul></li>
 <li>- Active Directory</li>
 <li>    - Enumeration</li>
 <li>        - Tool (Threads contain here)</li>
