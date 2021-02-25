@@ -41,9 +41,9 @@ Forum Navigation
 
 <h2>Features added and configured:</h2>
 --Feb 23
-Add Summernote editor into post page.
-(The functionality will be enabled in near future)
+    Add Summernote editor into post page.
+    (The functionality will be enabled in near future)
 
 --Feb 22
-Bind post links to each specific created thread
+    Bind post links to each specific created thread
 
