@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Penetration_Testing_Hub.Data;
 using Penetration_Testing_Hub.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Penetration_Testing_Hub.Controllers
 {
+    [Authorize(Roles= "Administrator,PTHmember")]
     public class PTHThreadsController : Controller
     {
         private readonly PTHDbContext _context;
@@ -27,6 +29,8 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // GET: PTHThreads/Details/5
+        [Authorize(Roles = "Administrator")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,6 +47,7 @@ namespace Penetration_Testing_Hub.Controllers
 
             return View(pTHThread);
         }
+
 
         // GET: PTHThreads/Create
         public IActionResult Create()
@@ -67,6 +72,7 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // GET: PTHThreads/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,6 +93,7 @@ namespace Penetration_Testing_Hub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,CreatTime,ModifyTime,OP")] PTHThread pTHThread)
         {
             if (id != pTHThread.Id)
@@ -118,6 +125,7 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // GET: PTHThreads/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +144,7 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // POST: PTHThreads/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

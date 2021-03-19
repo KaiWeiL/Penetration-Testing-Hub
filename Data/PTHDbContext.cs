@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Penetration_Testing_Hub.Data
 {
-    public class PTHDbContext : DbContext
+    public class PTHDbContext : IdentityDbContext
     {
         public PTHDbContext(DbContextOptions<PTHDbContext> options): base(options)
         {
