@@ -8,16 +8,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Penetration_Testing_Hub.Data;
 using Penetration_Testing_Hub.Models;
+using System.IO;
+using System.Text;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Penetration_Testing_Hub.Controllers
 {
     public class PTHPostsController : Controller
     {
         private readonly PTHDbContext _context;
+        private IWebHostEnvironment _hostEnvironment;
 
-        public PTHPostsController(PTHDbContext context)
+        public PTHPostsController(PTHDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _hostEnvironment = env;
         }
 
         // GET: PTHPosts
@@ -25,6 +30,10 @@ namespace Penetration_Testing_Hub.Controllers
         {
             //HttpContext.Session.SetString("ThreadId", ThreadId);
             var pTHDbContext = _context.PTHPosts.Include(p => p.PTHThread).Where(p => p.PTHThreadId.ToString() == ThreadId);
+            var stream = new FileStream(_hostEnvironment.WebRootPath + "/../Models/Posts/1.txt", FileMode.Open, FileAccess.Read);
+            using (var streamReader = new StreamReader(stream, Encoding.UTF8)) {
+                ViewBag.postText = streamReader.ReadToEnd();
+            }
             return View(await pTHDbContext.ToListAsync());
         }
 
