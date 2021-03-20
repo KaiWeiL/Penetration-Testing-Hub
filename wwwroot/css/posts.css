@@ -1,0 +1,57 @@
+﻿.container-post {
+    display: grid;
+    border: 2px solid black;
+    border-radius: 10px;
+    
+    grid-template-areas:
+        ".              title-cell    title-cell    title-cell     title-cell"
+        "dp-cell      content-cell  content-cell  content-cell   content-cell"
+        "author-cell  content-cell  content-cell  content-cell   content-cell"
+        "roll-cell    content-cell  content-cell  content-cell   content-cell"
+        ".            reply-cell   .            timestamp-cell timestamp-cell";
+    
+    border: 1.5px solid black;
+    grid-column-gap: 3px;
+    grid-row-gap: 3px;
+    margin-top: 1.9em;
+    padding: 1.2em 1.2em 1.2em 1.2em;
+}
+
+.post-cell {
+    padding: 0.6em 0.6em 0.6em 0.6em;
+}
+
+.dp-cell {
+    grid-area: dp-cell;
+}
+
+.authour-cell {
+    grid-area: authour-cell;
+}
+
+.roll-cell {
+    grid-area: roll-cell;
+}
+
+.reply-cell {
+    grid-area: reply-cell;
+}
+
+.title-cell {
+    grid-area: title-cell;
+    border: 1.5px solid black;
+}
+
+.content-cell {
+    grid-area: content-cell;
+    border: 1.5px solid black;
+}
+
+.timestamp-cell {
+    grid-area: timestamp-cell;
+    text-align: right;
+}
+
+.reply-button {
+    border-radius: 10px;
+}

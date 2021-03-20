@@ -3,6 +3,7 @@
 
 @section Styles {
     <link href="~/summernote-0.8.18-dist/summernote-lite.css" rel="stylesheet">
+    <link href="~/css/posts.css" rel="stylesheet">
 }
 
 
@@ -20,6 +21,7 @@
     </script>
     <script src="~/lib/jquery/dist/jquery-3.4.1.slim.min.js"></script>
     <script src="~/summernote-0.8.18-dist/summernote-lite.js"></script>
+    <script src="~/js/post.js"></script>
 
 }
 
@@ -31,35 +33,37 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-                @Html.DisplayNameFor(model => model.Subject)
+@Html.DisplayNameFor(model => model.Subject)
 
-                @Html.DisplayNameFor(model => model.OP)
+@Html.DisplayNameFor(model => model.OP)
 
-                @Html.DisplayNameFor(model => model.PostTime)
+@Html.DisplayNameFor(model => model.PostTime)
 
-                @Html.DisplayNameFor(model => model.PostFileName)
+@Html.DisplayNameFor(model => model.PostFileName)
 
-                @Html.DisplayNameFor(model => model.PTHThread)
+@Html.DisplayNameFor(model => model.PTHThread)
+@foreach (var item in Model)
+{
+    <div class="container-post">
+        <div class="post-cell"></div>
+        <div class="post-cell title-cell">@Html.DisplayFor(modelItem => item.Subject)</div>
+        <div class="post-cell dp-cell"></div>
+        <div class="post-cell content-cell">@ViewBag.postText</div>
+        <div class="post-cell author-cell">@Html.DisplayFor(modelItem => item.OP)</div>
+        <div class="post-cell role-cell"></div>
+        <div class="post-cell"></div>
+        <div class="post-cell reply-cell"><button type="button" class="btn btn-primary">Reply</button></div>
+        <div class="post-cell"></div>
+        <div class="post-cell timestamp-cell">@Html.DisplayFor(modelItem => item.PostTime)</div>
+    </div>
 
- 
-        @foreach (var item in Model)
-        {
-
-                    @Html.DisplayFor(modelItem => item.Subject)
-
-                    @Html.DisplayFor(modelItem => item.OP)
-
-                    @Html.DisplayFor(modelItem => item.PostTime)
-
-                    <div id="post-txt-file">@ViewBag.postText</div>
-
-                    @Html.DisplayFor(modelItem => item.PTHThread.Id)
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-        }
+    @Html.DisplayFor(modelItem => item.PTHThread.Id)
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+}
 
 <form method="post">
     <textarea id="summernote" name="editordata"></textarea>
