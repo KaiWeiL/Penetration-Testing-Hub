@@ -50,3 +50,14 @@ Add Summernote editor into post page.
 --Feb 22
 Bind post links to each specific created thread
 
+--Mar 20
+Designed the logo for PTH
+Style the website with bootswatch Skechy style
+
+--Mar 21
+Enable Summernote with read write functionalities to the post
+Create gridbox Layout for the Post
+
+--Mar 22
+Add new column to the AspNetUser table for name display on post
+(Instead of input, time and author are for the current logged-in user now)
