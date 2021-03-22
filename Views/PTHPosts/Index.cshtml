@@ -33,22 +33,13 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-@Html.DisplayNameFor(model => model.Subject)
-
-@Html.DisplayNameFor(model => model.OP)
-
-@Html.DisplayNameFor(model => model.PostTime)
-
-@Html.DisplayNameFor(model => model.PostFileName)
-
-@Html.DisplayNameFor(model => model.PTHThread)
 @foreach (var item in Model)
 {
     <div class="container-post">
         <div class="post-cell"></div>
         <div class="post-cell title-cell">@Html.DisplayFor(modelItem => item.Subject)</div>
         <div class="post-cell dp-cell"></div>
-        <div class="post-cell content-cell">@ViewBag.postText</div>
+        <div class="post-cell content-cell">@Html.Raw(ViewBag.idMapFileAndFileContent[item.Id][item.PostFileName])</div>
         <div class="post-cell author-cell">@Html.DisplayFor(modelItem => item.OP)</div>
         <div class="post-cell role-cell"></div>
         <div class="post-cell"></div>
@@ -57,7 +48,6 @@
         <div class="post-cell timestamp-cell">@Html.DisplayFor(modelItem => item.PostTime)</div>
     </div>
 
-    @Html.DisplayFor(modelItem => item.PTHThread.Id)
     <td>
         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
@@ -65,7 +55,14 @@
     </td>
 }
 
-<form method="post">
+@using Penetration_Testing_Hub.Models
+<form asp-action="Create">
+    @*<input asp-for="Subject" class="form-control" />*@
+    <input type="text" name="Subject" placeholder="Title..." />
+    <input type="text" name="OP" />
+    <input type="text" name="ThreadId" value="@ViewBag.ThreadId" hidden/>
     <textarea id="summernote" name="editordata"></textarea>
+
+    <button type="submit" class="btn btn-primary">Post</button>
 </form>
 <a asp-controller="PTHThreads" asp-action="Index">Go back to threads</a>

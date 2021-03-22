@@ -14,7 +14,7 @@ namespace Penetration_Testing_Hub.Models
         public DateTime CreatTime { get; set; }
         public DateTime ModifyTime { get; set; }
         [StringLength(30)]
-        [Display(Name = "User")]
+        [Display(Name = "Author")]
         public string OP { get; set; }
         public int ThreadCategory { get; set; }
 

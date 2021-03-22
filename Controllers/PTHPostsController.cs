@@ -29,11 +29,25 @@ namespace Penetration_Testing_Hub.Controllers
         public async Task<IActionResult> Index(string ThreadId)
         {
             //HttpContext.Session.SetString("ThreadId", ThreadId);
+            //It returns DbSet<PTHPost>
             var pTHDbContext = _context.PTHPosts.Include(p => p.PTHThread).Where(p => p.PTHThreadId.ToString() == ThreadId);
-            var stream = new FileStream(_hostEnvironment.WebRootPath + "/../Models/Posts/1.txt", FileMode.Open, FileAccess.Read);
-            using (var streamReader = new StreamReader(stream, Encoding.UTF8)) {
-                ViewBag.postText = streamReader.ReadToEnd();
+
+            //get the file content from DbSet<PTHPost> and add each of the content of the post to postTextList
+            Dictionary<int, Dictionary<string, string>> idMapFile = new Dictionary<int, Dictionary<string, string>> {};
+            Dictionary<string, string> fileMapFileContent = new Dictionary<string, string> {};
+            var recordList = pTHDbContext.ToList();
+            foreach (PTHPost post in recordList) {
+                var stream = new FileStream(_hostEnvironment.WebRootPath + "/../Models/Posts/" + post.PostFileName + ".txt", FileMode.Open, FileAccess.Read);
+                using (var streamReader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    fileMapFileContent.Add(post.PostFileName, streamReader.ReadToEnd());
+                    idMapFile.Add( post.Id, fileMapFileContent);
+                }
             }
+
+            ViewBag.idMapFileAndFileContent = idMapFile;
+            ViewBag.ThreadId = recordList[0].PTHThreadId;
+
             return View(await pTHDbContext.ToListAsync());
         }
 
@@ -68,16 +82,40 @@ namespace Penetration_Testing_Hub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Subject,OP,PostTime,PostFileName,PTHThreadId")] PTHPost pTHPost)
+        public async Task<IActionResult> Create([Bind("Id,Subject,OP")] PTHPost pTHPost, string editordata, string ThreadId)
         {
+            //System.Diagnostics.Debug.WriteLine(editordata);
             if (ModelState.IsValid)
             {
+                pTHPost.PostTime = DateTime.Now;
+
+                //generate the random prefix for file name
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[10];
+                var random = new Random();
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+                var fileNamePrefix = new String(stringChars);
+
+                pTHPost.PostFileName = fileNamePrefix + "-" + pTHPost.Subject; //All files are named with the subject prefixed with random string
+
+                //create txt file and then write the file
+                var postFile = System.IO.File.Create(_hostEnvironment.WebRootPath + "/../Models/Posts/" + pTHPost.PostFileName + ".txt");
+                var postFileWriter = new System.IO.StreamWriter(postFile);
+                postFileWriter.WriteLine(editordata);
+                postFileWriter.Dispose();
+
+                pTHPost.PTHThreadId = int.Parse(ThreadId);
+
                 _context.Add(pTHPost);
                 await _context.SaveChangesAsync();
 
                 //fixed empty list after creation through passing ThreadId for redirection
                 return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId});
             }
+
             ViewData["PTHThreadId"] = new SelectList(_context.PTHThreads, "Id", "Id", pTHPost.PTHThreadId);
             return View(pTHPost);
         }

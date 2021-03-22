@@ -12,7 +12,7 @@ namespace Penetration_Testing_Hub.Models
         [StringLength(100)]
         public string Subject { get; set; }
         [StringLength(30)]
-        [Display(Name = "User")]
+        [Display(Name = "Author")]
         public string OP { get; set; }
         public DateTime PostTime { get; set; }
         public string PostFileName { get; set; }
