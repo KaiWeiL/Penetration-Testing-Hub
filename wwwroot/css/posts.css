@@ -55,3 +55,11 @@
 .reply-button {
     border-radius: 10px;
 }
+
+#bootstrap-overrides #post-title {
+    margin-bottom: 1em;
+}
+
+#bootstrap-overrides form {
+    margin-top: 2em;
+}
