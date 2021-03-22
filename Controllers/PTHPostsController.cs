@@ -11,17 +11,21 @@ using Penetration_Testing_Hub.Models;
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Penetration_Testing_Hub.Controllers
 {
     public class PTHPostsController : Controller
     {
         private readonly PTHDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         private IWebHostEnvironment _hostEnvironment;
 
-        public PTHPostsController(PTHDbContext context, IWebHostEnvironment env)
+        public PTHPostsController(PTHDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment env)
         {
             _context = context;
+            _userManager = userManager;
             _hostEnvironment = env;
         }
 
@@ -44,6 +48,9 @@ namespace Penetration_Testing_Hub.Controllers
                     idMapFile.Add( post.Id, fileMapFileContent);
                 }
             }
+
+            ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            ViewBag.DisplayName = applicationUser.DisplayName;
 
             ViewBag.idMapFileAndFileContent = idMapFile;
             ViewBag.ThreadId = recordList[0].PTHThreadId;

@@ -58,8 +58,8 @@
 @using Penetration_Testing_Hub.Models
 <form asp-action="Create">
     @*<input asp-for="Subject" class="form-control" />*@
-    <input type="text" name="Subject" placeholder="Title..." />
-    <input type="text" name="OP" />
+    <input type="text" name="Subject" width="100" placeholder="Title..." />
+    <input type="text" name="OP" value="@ViewBag.DisplayName" hidden/>
     <input type="text" name="ThreadId" value="@ViewBag.ThreadId" hidden/>
     <textarea id="summernote" name="editordata"></textarea>
 

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Penetration_Testing_Hub.Data;
+using Penetration_Testing_Hub.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,6 @@ namespace Penetration_Testing_Hub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PTHDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<PTHDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -43,7 +41,7 @@ namespace Penetration_Testing_Hub
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<PTHDbContext>();
             services.AddControllersWithViews();
