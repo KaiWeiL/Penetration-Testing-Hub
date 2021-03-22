@@ -11,6 +11,6 @@ namespace Penetration_Testing_Hub.Models
     {
         [StringLength(36)]
         public string DisplayName { get; set; }
-
+        public string DPFileName { get; set; }
     }
 }

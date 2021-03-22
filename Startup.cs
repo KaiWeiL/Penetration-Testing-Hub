@@ -27,7 +27,7 @@ namespace Penetration_Testing_Hub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<PTHDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<PTHDbContext>(options =>
@@ -45,7 +45,7 @@ namespace Penetration_Testing_Hub
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+                    .AddEntityFrameworkStores<PTHDbContext>();
             services.AddControllersWithViews();
         }
 
