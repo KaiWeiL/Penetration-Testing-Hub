@@ -41,7 +41,7 @@ namespace Penetration_Testing_Hub.Controllers
             Dictionary<string, string> fileMapFileContent = new Dictionary<string, string> {};
             var recordList = pTHDbContext.ToList();
             foreach (PTHPost post in recordList) {
-                var stream = new FileStream(_hostEnvironment.WebRootPath + "/../Models/Posts/" + post.PostFileName + ".txt", FileMode.Open, FileAccess.Read);
+                var stream = new FileStream("Posts/" + post.PostFileName + ".txt", FileMode.Open, FileAccess.Read);
                 using (var streamReader = new StreamReader(stream, Encoding.UTF8))
                 {
                     fileMapFileContent.Add(post.PostFileName, streamReader.ReadToEnd());
@@ -109,7 +109,7 @@ namespace Penetration_Testing_Hub.Controllers
                 pTHPost.PostFileName = fileNamePrefix + "-" + pTHPost.Subject; //All files are named with the subject prefixed with random string
 
                 //create txt file and then write the file
-                var postFile = System.IO.File.Create(_hostEnvironment.WebRootPath + "/../Models/Posts/" + pTHPost.PostFileName + ".txt");
+                var postFile = System.IO.File.Create("Posts/" + pTHPost.PostFileName + ".txt");
                 var postFileWriter = new System.IO.StreamWriter(postFile);
                 postFileWriter.WriteLine(editordata);
                 postFileWriter.Dispose();

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -20,12 +20,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Posts\" />
+    <Folder Include="Posts\" />
     <Folder Include="Views\Stage\Post-Exploitation\" />
     <Folder Include="Views\Stage\Exploitation\" />
     <Folder Include="Views\Stage\Privilege Escalation\" />
     <Folder Include="Views\Stage\Reconnaissance\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Posts\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\summernote-0.8.18-dist\font\summernote.eot" />
