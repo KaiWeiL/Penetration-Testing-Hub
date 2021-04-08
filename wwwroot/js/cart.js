@@ -35,7 +35,7 @@ for (let i = 0; i < itemIdArray.length; i++) {
 
     //price div
     let goodPriceDiv = document.createElement('div');
-    goodPriceDiv.innerHTML = itemIdArray[i].price;
+    goodPriceDiv.innerHTML = itemIdArray[i].price + ' CAD';
 
     //quantity div
     let goodQuantityDiv = document.createElement('div');

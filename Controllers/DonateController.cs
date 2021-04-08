@@ -7,19 +7,29 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Stripe;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using Penetration_Testing_Hub.Data;
+
 namespace Penetration_Testing_Hub.Controllers
 {
     public class DonateController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        IConfiguration _iconfiguration;
+        PTHDbContext _context;
 
-        public DonateController(ILogger<HomeController> logger)
+        public DonateController(ILogger<HomeController> logger, IConfiguration iconfiguration, PTHDbContext context)
         {
             _logger = logger;
+            _iconfiguration = iconfiguration;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            ViewBag.isPaymentSuccess = TempData["isPaymentSuccess"];
             return View("~/Views/Donate/Index.cshtml");
         }
 
@@ -68,6 +78,44 @@ namespace Penetration_Testing_Hub.Controllers
         public IActionResult Cart()
         {
             return View("~/Views/Donate/Cart.cshtml");
+        }
+
+        public IActionResult CheckOut() {
+
+            return View();
+        }
+
+        public IActionResult Payment() {
+            //var order = HttpContext.Session.GetObject<Models.Order>("Order");
+            //ViewBag.Total = order.Total;
+            ViewBag.PublicKey = _iconfiguration.GetSection("Stripe")["PublishableKey"];
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,Email,Total")] Models.Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                order.OrderDate = DateTime.Now;
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    TempData["isPaymentSuccess"] = "true";
+                }
+                else {
+                    TempData["isPaymentSuccess"] = "false";
+                }
+                
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

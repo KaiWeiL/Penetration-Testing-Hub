@@ -43,6 +43,9 @@ namespace Penetration_Testing_Hub
                 options.Cookie.IsEssential = true;
             });
 
+            //add config support for Donate
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<PTHDbContext>();

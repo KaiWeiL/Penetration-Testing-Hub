@@ -18,5 +18,6 @@ namespace Penetration_Testing_Hub.Data
         public DbSet<PTHThread> PTHThreads { get; set; }
         public DbSet<PTHPost> PTHPosts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
