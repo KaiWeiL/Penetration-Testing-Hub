@@ -21,3 +21,20 @@ body {
 .logo {
     color: white !important;
 }
+
+.cart-img {
+    background-color: lightgray;
+    border-radius: 15px;
+    padding: 9px 18px;
+    position: absolute;
+    right: 268.6px;
+    top: 13px;
+}
+
+#cart-item-quantity {
+    position: absolute;
+    right: 272px;
+    top: 30px;
+    font-weight: 700;
+    color: darkred;
+}

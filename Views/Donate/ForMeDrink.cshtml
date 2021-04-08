@@ -1,0 +1,24 @@
+﻿@section Styles {
+    <link href="~/css/product-page.css" rel="stylesheet">
+}
+
+
+@section Scripts
+{
+    <script src="~/js/quantity.js"></script>
+}
+
+
+<h1>Drink</h1>
+
+<div class="goods-container">
+    <div class="good-container" id="drink-coffee-itemId">
+        <div>Buy Me Tim Horton</div>
+        <div><img src="/img/pth-donate-img/PTH-coffee.jpg" width="200" height="200" /></div>
+        <div class="good-quantity"></div>
+        <div class="good-price">5 CAD</div>
+        <div><button type="submit" class="btn btn-primary add-to-cart-button">Add to Cart</button></div>
+    </div>
+</div>
+
+<a asp-controller="Donate" asp-action="ForMe" asp-route-CategoryId="-1">Go back</a>

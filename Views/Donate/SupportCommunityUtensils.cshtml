@@ -1,0 +1,25 @@
+﻿
+@section Styles {
+    <link href="~/css/product-page.css" rel="stylesheet">
+}
+
+
+@section Scripts
+{
+    <script src="~/js/quantity.js"></script>
+}
+
+<h1>Utensils</h1>
+
+<div class="goods-container">
+    <div class="good-container" id="utensil-mug-itemId">
+        <div>PTH Mug</div>
+        <div><img src="~/img/pth-donate-img/PTH-Mug.jpg" width="150" height="170" /></div>
+        <div class="good-quantity"></div>
+        <div class="good-price">10 CAD</div>
+        <div><button type="submit" class="btn btn-primary add-to-cart-button">Add to Cart</button></div>
+    </div>
+</div>
+
+<a asp-controller="Donate" asp-action="SupportCommunity" asp-route-CategoryId="-1">Go back</a>
+

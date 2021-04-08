@@ -1,0 +1,32 @@
+﻿
+@section Styles {
+    <link href="~/css/product-page.css" rel="stylesheet">
+}
+
+
+@section Scripts
+{
+    <script src="~/js/quantity.js"></script>
+}
+
+<h1>Clothes</h1>
+
+<div class="goods-container">
+    <div class="good-container" id="clothes-hoodie-itemId">
+        <div>PTH Hoodie</div>
+        <div><img src="~/img/pth-donate-img/PTH-Hoodie.jpg" width="330" height="200" /></div>
+        <div class="good-quantity"></div>
+        <div class="good-price">35 CAD</div>
+        <div><button type="submit" class="btn btn-primary add-to-cart-button">Add to Cart</button></div>
+    </div>
+    <div class="good-container" id="clothes-tshirt-itemId">
+        <div>PTH T-Shirt</div>
+        <div><img src="~/img/pth-donate-img/PTH-T-Shirt.jpg" width="200" height="200" /></div>
+        <div class="good-quantity"></div>
+        <div class="good-price">25 CAD</div>
+        <div><button type="submit" class="btn btn-primary add-to-cart-button">Add to Cart</button></div>
+    </div>
+</div>
+
+<a asp-controller="Donate" asp-action="SupportCommunity" asp-route-CategoryId="-1">Go back</a>
+
