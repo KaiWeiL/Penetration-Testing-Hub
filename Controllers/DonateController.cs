@@ -11,6 +11,8 @@ using Stripe;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Penetration_Testing_Hub.Data;
+using Stripe.Checkout;
+using Microsoft.EntityFrameworkCore;
 
 namespace Penetration_Testing_Hub.Controllers
 {
@@ -80,16 +82,48 @@ namespace Penetration_Testing_Hub.Controllers
             return View("~/Views/Donate/Cart.cshtml");
         }
 
-        public IActionResult CheckOut() {
-
-            return View();
+        //[ValidateAntiForgeryToken]
+        public IActionResult Payment() {
+            ViewBag.PublicKey = _iconfiguration.GetSection("Stripe")["PublishableKey"];
+            return View("~/Views/Donate/Payment.cshtml");
         }
 
-        public IActionResult Payment() {
-            //var order = HttpContext.Session.GetObject<Models.Order>("Order");
-            //ViewBag.Total = order.Total;
-            ViewBag.PublicKey = _iconfiguration.GetSection("Stripe")["PublishableKey"];
-            return View();
+        [HttpPost]
+        public IActionResult ProcessPayment() {
+
+            var order = HttpContext.Session.GetObject<Models.Order>("order");
+
+            StripeConfiguration.ApiKey = _iconfiguration.GetSection("Stripe")["SecretKey"];
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string>
+                {
+                  "card",
+                },
+                LineItems = new List<SessionLineItemOptions>
+                {
+                  new SessionLineItemOptions
+                  {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                      UnitAmount = (long?)order.Total * 100,
+                      Currency = "cad",
+                      ProductData = new SessionLineItemPriceDataProductDataOptions
+                      {
+                        Name = "PTH Donate",
+                      },
+                    },
+                    Quantity = 1,
+                  },
+                },
+                Mode = "payment",
+                SuccessUrl = "https://" + Request.Host + "/Donate/SaveOrder",
+                CancelUrl = "https://" + Request.Host + "/Donate/Cart"
+            };
+            var service = new SessionService();
+            Session session = service.Create(options);
+            return Json(new { id = session.Id });
         }
 
         public IActionResult Create()
@@ -99,24 +133,34 @@ namespace Penetration_Testing_Hub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,Email,Total")] Models.Order order)
+        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,Email")] Models.Order order, string Total)
         {
+            order.OrderDate = DateTime.Now;
+            order.Total = int.Parse(Total);
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                order.OrderDate = DateTime.Now;
-                if (await _context.SaveChangesAsync() > 0)
-                {
-                    TempData["isPaymentSuccess"] = "true";
-                }
-                else {
-                    TempData["isPaymentSuccess"] = "false";
-                }
-                
-                return RedirectToAction(nameof(Index));
+                HttpContext.Session.SetObject("order", order);           
+                return RedirectToAction(nameof(Payment));
             }
             return View(order);
         }
+
+        public IActionResult SaveOrder()
+        {
+            var order = HttpContext.Session.GetObject<Models.Order>("order");
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            //if ( _context.SaveChanges() > 0)
+            //{
+            //    ViewBag.isPaymentSuccess = "true";
+            //}
+            //else
+            //{
+            //    ViewBag.isPaymentSuccess = "false";
+            //}
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

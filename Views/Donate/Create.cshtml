@@ -1,5 +1,7 @@
 ﻿@model Penetration_Testing_Hub.Models.Order
-
+    @section Styles{ 
+        <link href="~/css/site.css" rel="stylesheet">
+}
 
 <h1>Check Out</h1>
 
@@ -55,12 +57,11 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" id="money-total" disabled />
-                <span asp-validation-for="Total" class="text-danger"></span>
+                <input type="hidden" name="Total" id="create-total" value=""/>
             </div>
+            <div name="Total" class="money-total"></div>
             <div class="form-group">
-                <input type="submit" value="Confirm" class="btn btn-primary" />
+                <input type="submit" value="Confirm and Pay" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -72,5 +73,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/checkout.js"></script>
 }

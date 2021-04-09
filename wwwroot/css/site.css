@@ -38,3 +38,10 @@ body {
     font-weight: 700;
     color: darkred;
 }
+
+.money-total {
+    color: darkred;
+    font-size: 1.6em;
+    margin-top: 2em;
+    margin-bottom: 2em
+}

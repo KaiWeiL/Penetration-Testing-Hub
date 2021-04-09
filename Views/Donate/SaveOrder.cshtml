@@ -1,0 +1,25 @@
+﻿@section Styles {
+    <link href="~/css/posts.css" rel="stylesheet">
+}
+
+
+@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery-3.4.1.slim.min.js"></script>
+
+    <script type="text/javascript">
+        function clearCache() {
+            localStorage.clear();
+            document.querySelector('#cart-item-quantity').innerHTML = '0';
+        }
+
+    @if (ViewBag.isPaymentSuccess == "true") {
+        @:clearCache();
+    }
+    </script>
+}
+
+
+<p>Thank you! You have successfully made the donation!</p>
+
+<a asp-controller="Donate" asp-action="Index">Go back</a>

@@ -48,3 +48,4 @@ for (let i = 0; i < itemIdArray.length; i++) {
     document.querySelector('.goods-container-checkout').appendChild(goodContainerDiv);
 }
 
+
