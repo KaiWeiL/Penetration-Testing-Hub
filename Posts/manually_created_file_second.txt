@@ -1,0 +1,2 @@
+
+Install Burp CA certificate to intercept HTTPS websites. Not all sites will show the “Accept the Risk” messages when intercepting them. Most modern sites will fail to connect or render if there is no TLS certificate in place.
