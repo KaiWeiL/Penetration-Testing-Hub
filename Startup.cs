@@ -31,8 +31,12 @@ namespace Penetration_Testing_Hub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PTHDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<PTHDbContext>(options =>
+            //    options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
+            string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContextPool<PTHDbContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDistributedMemoryCache();

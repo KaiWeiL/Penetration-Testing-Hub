@@ -15,6 +15,11 @@ namespace Penetration_Testing_Hub.Data
         {
         }
 
+   //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+   //     {
+   //optionsBuilder.UseMySQL("server=localhost;database=library;user=user;password=password");
+   //     }
+
         public DbSet<PTHThread> PTHThreads { get; set; }
         public DbSet<PTHPost> PTHPosts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
