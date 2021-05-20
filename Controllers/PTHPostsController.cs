@@ -40,20 +40,28 @@ namespace Penetration_Testing_Hub.Controllers
             Dictionary<int, Dictionary<string, string>> idMapFile = new Dictionary<int, Dictionary<string, string>> {};
             Dictionary<string, string> fileMapFileContent = new Dictionary<string, string> {};
             var recordList = pTHDbContext.ToList();
-            foreach (PTHPost post in recordList) {
-                var stream = new FileStream("Posts/" + post.PostFileName + ".txt", FileMode.Open, FileAccess.Read);
-                using (var streamReader = new StreamReader(stream, Encoding.UTF8))
+            if (recordList.Count > 0)
+            {
+                foreach (PTHPost post in recordList)
                 {
-                    fileMapFileContent.Add(post.PostFileName, streamReader.ReadToEnd());
-                    idMapFile.Add( post.Id, fileMapFileContent);
+                    var stream = new FileStream("Posts/" + post.PostFileName + ".txt", FileMode.Open, FileAccess.Read);
+                    using (var streamReader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        fileMapFileContent.Add(post.PostFileName, streamReader.ReadToEnd());
+                        idMapFile.Add(post.Id, fileMapFileContent);
+                    }
                 }
+                ViewBag.idMapFileAndFileContent = idMapFile;
+                ViewBag.ThreadId = recordList[0].PTHThreadId;
+            }
+            else if (recordList.Count == 0)
+            {
+                ViewBag.ThreadId = ThreadId;
+                ViewBag.isThreadEmpty = true;
             }
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
             ViewBag.DisplayName = applicationUser.DisplayName;
-
-            ViewBag.idMapFileAndFileContent = idMapFile;
-            ViewBag.ThreadId = recordList[0].PTHThreadId;
 
             return View(await pTHDbContext.ToListAsync());
         }
