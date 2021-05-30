@@ -30,7 +30,7 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // GET: PTHPosts
-        public async Task<IActionResult> Index(string ThreadId)
+        public async Task<IActionResult> Index(string ThreadId, string ThreadCategory, string ToolOrTech)
         {
             //HttpContext.Session.SetString("ThreadId", ThreadId);
             //It returns DbSet<PTHPost>
@@ -62,6 +62,8 @@ namespace Penetration_Testing_Hub.Controllers
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
             ViewBag.DisplayName = applicationUser.DisplayName;
+            ViewBag.ThreadCategory = ThreadCategory;
+            ViewBag.ToolOrTech = ToolOrTech;
 
             return View(await pTHDbContext.ToListAsync());
         }
@@ -97,7 +99,7 @@ namespace Penetration_Testing_Hub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Subject,OP")] PTHPost pTHPost, string editordata, string ThreadId)
+        public async Task<IActionResult> Create([Bind("Id,Subject,OP")] PTHPost pTHPost, string editordata, string ThreadId, string ThreadCategory, string ToolOrTech)
         {
             //System.Diagnostics.Debug.WriteLine(editordata);
             if (ModelState.IsValid)
@@ -128,7 +130,7 @@ namespace Penetration_Testing_Hub.Controllers
                 await _context.SaveChangesAsync();
 
                 //fixed empty list after creation through passing ThreadId for redirection
-                return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId});
+                return RedirectToAction(nameof(Index), new { ThreadId = pTHPost.PTHThreadId, ThreadCategory, ToolOrTech});
             }
 
             ViewData["PTHThreadId"] = new SelectList(_context.PTHThreads, "Id", "Id", pTHPost.PTHThreadId);

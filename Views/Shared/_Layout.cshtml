@@ -56,21 +56,23 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Stage" asp-action="Index">Stage Technique</a>
-                            <a class="dropdown-item" asp-controller="Active Directory" asp-action="Index">Active Directory</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
+                            <a class="dropdown-item" asp-controller="" asp-action="">Active Directory</a>
+                            @*<div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>*@
                         </div>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" asp-controller="Donate" asp-action="Index">Donate</a>
                     </li>
                 </ul>
-                <partial name="_LoginPartial" />
-                <partial name="_ShoppingPartial" />
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <ul class="navbar-nav">
+                    <partial name="_LoginPartial" />
+                    <partial name="_ShoppingPartial" />
+                </ul>
+                    @*<form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>*@
             </div>
         </nav>
 
@@ -83,10 +85,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            <ul>
-                <li>Student: Kai-Wei Lin 200436558</li>
-                <li>Course: COMP 2084 ASP.NET-02</li>
-            </ul>
+                <div>2021 PTH Organization</div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

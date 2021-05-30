@@ -14,9 +14,10 @@ namespace Penetration_Testing_Hub.Controllers
             return View();
         }
 
-        public IActionResult Reconnaissance()
+        public IActionResult ToolOrTech(String ThreadCategory)
         {
-            return View("Reconnaissance");
+            ViewBag.ThreadCategory = ThreadCategory;
+            return View("ToolOrTech");
         }
     }
 }

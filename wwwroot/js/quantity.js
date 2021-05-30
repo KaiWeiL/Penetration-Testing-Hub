@@ -43,12 +43,14 @@ function isQuantityAdjustable(leftDiv, inputField, rightDiv, trueOrFalse) {
         goodQuantityRightDiv.onclick = e => {
             //increase input value
             e.target.previousElementSibling.value++;
-            if (parseInt(e.target.previousElementSibling.value) == 1) {
-                let divLeft = e.target.previousElementSibling.previousElementSibling;
-                divLeft.style.cursor = 'pointer';
-                divLeft.onclick = e => {
+
+            //Add Left Div listener
+            if (localStorage.getItem(itemId) == null || JSON.parse(localStorage.getItem(itemId)).quantity > 0) {
+                goodQuantityLeftDiv.style.cursor = 'pointer';
+                goodQuantityLeftDiv.onclick = e => {
+                    //minus input value
                     e.target.nextElementSibling.value--;
-                    if (JSON.parse(localStorage.getItem(itemId)).quantity == 0) {
+                    if (parseInt(e.target.nextElementSibling.value) == 0) {
                         e.target.onclick = e => { };
                         e.target.onmouseover = e => { };
                         e.target.onmouseleave = e => { };
@@ -56,10 +58,10 @@ function isQuantityAdjustable(leftDiv, inputField, rightDiv, trueOrFalse) {
                         e.target.style.cursor = 'default';
                     }
                 }
-                divLeft.onmouseover = e => {
+                goodQuantityLeftDiv.onmouseover = e => {
                     e.target.style.backgroundColor = 'grey';
                 }
-                divLeft.onmouseleave = e => {
+                goodQuantityLeftDiv.onmouseleave = e => {
                     e.target.style.backgroundColor = '';
                 }
             }
@@ -118,31 +120,38 @@ function addAdjustQuantityElement() {
     return quantityBrothers;
 }
 
-//initialize quantity adjustments and append them
-document.querySelectorAll('.good-quantity').forEach(element => {
+function initialize() {
 
-    let quantityBrothers = addAdjustQuantityElement();
-    let itemId = element.parentElement.id;
-
-    element.appendChild(quantityBrothers[0]);
-    element.appendChild(quantityBrothers[1]);
-    element.appendChild(quantityBrothers[2]);
-
-    if (localStorage.getItem(itemId + '-state') == 'true') {
-        isQuantityAdjustable(quantityBrothers[0], quantityBrothers[1], quantityBrothers[2], false);
-    } else {
-        isQuantityAdjustable(quantityBrothers[0], quantityBrothers[1], quantityBrothers[2], true);
+    if (localStorage.getItem('cart-item-quantity') != null) {
+        document.querySelector('#cart-item-quantity').innerHTML = localStorage.getItem('cart-item-quantity');
     }
 
-    if (localStorage.getItem(element.parentElement.id) == null) {
-        element.firstElementChild.nextElementSibling.value = '0';
-    } else {
-        element.firstElementChild.nextElementSibling.value = JSON.parse(localStorage.getItem(element.parentElement.id)).quantity;
-    }
-});
+    //initialize quantity adjustments and append them
+    document.querySelectorAll('.good-quantity').forEach(element => {
 
-//initialize ADD TO CART button state
-document.querySelectorAll('.good-container').forEach(element => addAddToCartButtonListenerWithState(element));
+        let quantityBrothers = addAdjustQuantityElement();
+        let itemId = element.parentElement.id;
+
+        element.appendChild(quantityBrothers[0]);
+        element.appendChild(quantityBrothers[1]);
+        element.appendChild(quantityBrothers[2]);
+
+        if (localStorage.getItem(itemId + '-state') == 'true') {
+            isQuantityAdjustable(quantityBrothers[0], quantityBrothers[1], quantityBrothers[2], false);
+        } else {
+            isQuantityAdjustable(quantityBrothers[0], quantityBrothers[1], quantityBrothers[2], true);
+        }
+
+        if (localStorage.getItem(element.parentElement.id) == null) {
+            element.firstElementChild.nextElementSibling.value = '0';
+        } else {
+            element.firstElementChild.nextElementSibling.value = JSON.parse(localStorage.getItem(element.parentElement.id)).quantity;
+        }
+    });
+
+    //initialize ADD TO CART button state
+    document.querySelectorAll('.good-container').forEach(element => addAddToCartButtonListenerWithState(element));
+}
 
 function addAddToCartButtonListenerWithState(item) {
     let itemId = item.id;
@@ -179,10 +188,15 @@ function addAddToCartButtonListenerWithState(item) {
             localStorage.setItem(itemId, JSON.stringify(itemInfo));
 
             //increase cart item quantity (one item at most can stand for 1)
-            let cartQuantity = parseInt(localStorage.getItem('cart-item-quantity'));
-            cartQuantity++;
-            localStorage.setItem('cart-item-quantity', cartQuantity.toString());
-            document.querySelector('#cart-item-quantity').innerHTML = cartQuantity.toString();
+            if (localStorage.getItem('cart-item-quantity') != null) {
+                let cartQuantity = parseInt(localStorage.getItem('cart-item-quantity'));
+                cartQuantity++;
+                localStorage.setItem('cart-item-quantity', cartQuantity.toString());
+                document.querySelector('#cart-item-quantity').innerHTML = cartQuantity.toString();
+            } else {
+                localStorage.setItem('cart-item-quantity', '1');
+                document.querySelector('#cart-item-quantity').innerHTML = '1';
+            }
 
             //Edit Quantity Button shows up
             e.target.parentElement.parentElement.appendChild(createEditQuantityButton());
@@ -234,3 +248,4 @@ function createEditQuantityButton() {
     return editQuantityDiv;
 }
 
+initialize();

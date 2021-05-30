@@ -13,20 +13,26 @@ using Microsoft.Extensions.Configuration;
 using Penetration_Testing_Hub.Data;
 using Stripe.Checkout;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Penetration_Testing_Hub.Controllers
 {
     public class DonateController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<HomeController> _logger;
         IConfiguration _iconfiguration;
         PTHDbContext _context;
 
-        public DonateController(ILogger<HomeController> logger, IConfiguration iconfiguration, PTHDbContext context)
+        public DonateController(ILogger<HomeController> logger, IConfiguration iconfiguration,
+            PTHDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _iconfiguration = iconfiguration;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -133,18 +139,21 @@ namespace Penetration_Testing_Hub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,CustomerId,FirstName,LastName,Address,City,Province,PostalCode,Phone,Email")] Models.Order order, string Total)
+        public async Task<IActionResult> CreateAsync([Bind("FirstName,LastName,Address,City,Province,PostalCode,Phone,Email")] Models.Order order, string Total)
         {
+            order.CustomerID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             order.OrderDate = DateTime.Now;
             order.Total = int.Parse(Total);
-            if (ModelState.IsValid)
-            {
-                HttpContext.Session.SetObject("order", order);           
+            //if (ModelState.IsValid)
+            //{
+                //HttpContext.Session.SetObject("order", order);
+                _context.Add(order);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Payment));
-            }
-            return View(order);
-        }
+            //}
+            //return View(order);
 
+        }
         public IActionResult SaveOrder()
         {
             var order = HttpContext.Session.GetObject<Models.Order>("order");

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Penetration_Testing_Hub.Data;
 
 namespace Penetration_Testing_Hub.Migrations
 {
     [DbContext(typeof(PTHDbContext))]
-    partial class PTHDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529144356_production-1")]
+    partial class production1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,9 +324,6 @@ namespace Penetration_Testing_Hub.Migrations
                     b.Property<string>("Title")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
-
-                    b.Property<string>("ToolOrTech")
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

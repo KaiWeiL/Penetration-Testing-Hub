@@ -3,9 +3,9 @@
     grid-template-columns: 19em 19em 19em;
     column-gap: 3em;
 }
+
 .good-container {
     justify-self: center;
-
     text-align: center;
     align-items: center;
     display: flex;
@@ -17,11 +17,11 @@
     margin-bottom: 1em;
 }
 
-h1 {
+h2 {
     text-align: center;
 }
 
-img {
+.goods-container img {
     margin-top: 1em
 }
 
@@ -46,7 +46,7 @@ img {
 }
 
 .add-to-cart-button {
-    margin-top:1.2em
+    margin-top: 1.2em
 }
 
 
@@ -65,12 +65,11 @@ img {
     align-items: center;
     display: flex;
     flex-direction: row;
-
     border: 2px solid black;
     border-radius: 10px;
     margin-bottom: 1.6em;
 }
-.good-container-checkout div {
-    flex-basis: 50%;
-}
 
+    .good-container-checkout div {
+        flex-basis: 50%;
+    }

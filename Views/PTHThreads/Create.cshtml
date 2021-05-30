@@ -32,6 +32,8 @@
                 <input asp-for="OP" class="form-control" />
                 <span asp-validation-for="OP" class="text-danger"></span>
             </div>
+            <input id="ThreadCategory" name="ThreadCategory" value="@ViewBag.ThreadCategory" hidden />
+            <input id="ToolOrTech" name="ToolOrTech" value="@ViewBag.ToolOrTech" hidden />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

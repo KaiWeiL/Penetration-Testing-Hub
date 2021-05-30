@@ -73,8 +73,10 @@
     <input type="text" name="Subject" id="post-title" placeholder="Title..." />
     <input type="text" name="OP" value="@ViewBag.DisplayName" hidden />
     <input type="text" name="ThreadId" value="@ViewBag.ThreadId" hidden />
+    <input type="text" name="ThreadCategory" value="@ViewBag.ThreadCategory" hidden />
+    <input type="text" name="ToolOrTech" value="@ViewBag.ToolOrTech" hidden />
     <textarea id="summernote" name="editordata"></textarea>
 
     <button type="submit" class="btn btn-primary">Post</button>
 </form>
-<a asp-controller="PTHThreads" asp-action="Index">Go back to threads</a>
+<a asp-controller="PTHThreads" asp-action="Index" asp-route-ThreadCategory="@ViewBag.ThreadCategory" asp-route-ToolOrTech="@ViewBag.ToolOrTech">Go back to threads</a>

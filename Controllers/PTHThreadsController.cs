@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Penetration_Testing_Hub.Controllers
 {
+
     [Authorize(Roles= "Administrator,PTHmember")]
     public class PTHThreadsController : Controller
     {
@@ -23,9 +24,12 @@ namespace Penetration_Testing_Hub.Controllers
         }
 
         // GET: PTHThreads
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string ThreadCategory, string ToolOrTech)
         {
-            return View(await _context.PTHThreads.ToListAsync());
+            ViewBag.ThreadCategory = ThreadCategory;
+            ViewBag.ToolOrTech = ToolOrTech;
+            return View(await _context.PTHThreads.Where(p => p.ThreadCategory
+                        .ToString().Equals(ThreadCategory)).Where(p => p.ToolOrTech.Equals(ToolOrTech)).ToListAsync());
         }
 
         // GET: PTHThreads/Details/5
@@ -50,8 +54,10 @@ namespace Penetration_Testing_Hub.Controllers
 
 
         // GET: PTHThreads/Create
-        public IActionResult Create()
+        public IActionResult Create(string ThreadCategory, string ToolOrTech)
         {
+            ViewBag.ThreadCategory = ThreadCategory;
+            ViewBag.ToolOrTech = ToolOrTech;
             return View();
         }
 
@@ -60,13 +66,16 @@ namespace Penetration_Testing_Hub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,CreatTime,ModifyTime,OP")] PTHThread pTHThread)
+        public async Task<IActionResult> Create([Bind("Id,Title,CreatTime,ModifyTime,OP,ThreadCategory,ToolOrTech")] PTHThread pTHThread)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(pTHThread);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),
+                        controllerName: "PTHThreads",
+                        routeValues: new { ThreadCategory = pTHThread.ThreadCategory, ToolOrTech = pTHThread.ToolOrTech }
+                );
             }
             return View(pTHThread);
         }

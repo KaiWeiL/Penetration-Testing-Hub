@@ -17,6 +17,7 @@ namespace Penetration_Testing_Hub.Models
         [Display(Name = "Author")]
         public string OP { get; set; }
         public int ThreadCategory { get; set; }
+        public string ToolOrTech { get; set; }
 
         public ICollection<PTHPost> PTHPosts { get; set; }
     }
